@@ -75,11 +75,29 @@
 						<div class="row">
 							<div class="col-md-12">
 
-								<div class="markSearch">
-									<!-- Added for Carr Jan. 2019  -->
-									<input type="search" placeholder="Search Inventory" onfocus="openAll()"/>
-									<div>
-										<!-- <span class="fa fa-times-circle" data-search="clear" aria-hidden="true">
+                                <a>
+	                            <xsl:attribute name="href">
+	                            	<xsl:text>https://aeon.bowdoin.edu/logon?Action=10</xsl:text>
+					<xsl:text>&amp;</xsl:text>
+					<xsl:text>Form=31</xsl:text>
+					<xsl:text>&amp;</xsl:text>
+					<xsl:text>Value=https://library.bowdoin.edu/arch/ead/</xsl:text>
+	                            	<xsl:value-of select="/ead:ead/ead:eadheader/ead:eadid"/>
+	                            	<xsl:text>.xml</xsl:text>
+	                            </xsl:attribute>
+	                            <xsl:attribute name="class">
+	                            	<xsl:text>btn btn-info aeon-request</xsl:text>
+	                            </xsl:attribute>
+	                            <xsl:attribute name="role">
+	                            	<xsl:text>button</xsl:text>
+	                            </xsl:attribute>
+	                            Request for Use</a>
+
+				<div class="markSearch">
+						<!-- Added for Carr Jan. 2019  -->
+							<input type="search" placeholder="Search Guide" onfocus="openAll()"/>
+							<div>
+				<!-- <span class="fa fa-times-circle" data-search="clear" aria-hidden="true">
                     		<div class="visuallyhidden">Clear search box</div>
                     		</span> -->
 									</div>
@@ -159,7 +177,7 @@
 	<xsl:template name="digitized">
 		<div class="row show-grid digitized">
 			<div class="col-md-5">
-				<div class="arrow_box">Digitized</div>
+				<div class="arrow_box">View Online</div>
 			</div>
 			<div class="col-md-7">Some materials from this collection are available online.
 				<a href="#" onclick="daoStart();">Start viewing now &#187;</a>
@@ -1257,9 +1275,12 @@
 		<li class="dao">
 			<a class="{@xlink:role}" href="{@xlink:href}" target="_blank">
 				<xsl:choose>
-					<xsl:when test="starts-with(@xlink:role, 'Audio-')">Listen </xsl:when>
-					<xsl:when test="starts-with(@xlink:role, 'Video-')">Watch </xsl:when>
-					<xsl:otherwise>View </xsl:otherwise>
+					<xsl:when test="starts-with(@xlink:role, 'audio-')">Listen to </xsl:when>
+					<xsl:when test="starts-with(@xlink:role, 'video-')">Watch </xsl:when>
+					<xsl:when test="starts-with(@xlink:role, 'zip-')">Access </xsl:when>
+					<xsl:when test="starts-with(@xlink:role, 'data-')">Access </xsl:when>
+					
+					<xsl:otherwise>View </xsl:otherwise> <!-- for text- and image- -->
 				</xsl:choose>
 				<xsl:if test="../ead:unittitle != @xlink:title">
 					<xsl:value-of select="@xlink:title"/>
