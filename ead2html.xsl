@@ -1277,14 +1277,21 @@
 				<xsl:choose>
 					<xsl:when test="starts-with(@xlink:role, 'audio-')">Listen to </xsl:when>
 					<xsl:when test="starts-with(@xlink:role, 'video-')">Watch </xsl:when>
-					<xsl:when test="starts-with(@xlink:role, 'zip-')">Access </xsl:when>
-					<xsl:when test="starts-with(@xlink:role, 'data-')">Access </xsl:when>
+					<xsl:when test="starts-with(@xlink:role, 'zip-')">Download </xsl:when>
+					<xsl:when test="starts-with(@xlink:role, 'data-')">Download </xsl:when>
 					
 					<xsl:otherwise>View </xsl:otherwise> <!-- for text- and image- -->
 				</xsl:choose>
 				<xsl:if test="../ead:unittitle != @xlink:title">
 					<xsl:value-of select="@xlink:title"/>
-				</xsl:if> online</a>
+				</xsl:if> 
+				<xsl:choose>
+					<xsl:when test="starts-with(@xlink:role, 'zip-')"> </xsl:when>
+					<xsl:when test="starts-with(@xlink:role, 'data-')"> </xsl:when>
+					
+					<xsl:otherwise> online </xsl:otherwise> <!-- for text- and image- -->
+				</xsl:choose>
+			</a>
 		</li>
 	</xsl:template>
 
