@@ -17,6 +17,7 @@
         *                  Rewrite for Bowdoin College Library            *
         *                  Tweaked to work with ArchivesSpace EAD         *
         *                  Tweaked to display new options div, 20211214 CR*
+        *                  Added accessibility features, 20220426 CR      *
         *******************************************************************
     -->
     <!-- Server side includes for HEAD, masthead, and footer -->
@@ -40,6 +41,7 @@
 
         <head>
             <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
             <title>
                 <xsl:value-of select="$full-title" />
             </title>
@@ -49,8 +51,11 @@
         </head>
 
         <body>
+            <div id="skip2main">
+                <a href="#main-content">Skip to main content</a>
+            </div>
             <xsl:call-template name="header" />
-            <div class="wrapper">
+            <main class="wrapper">
                 <section class="container" id="main-content">
                     <!-- Main Title -->
                     <a name="top" />
@@ -143,7 +148,7 @@
                         </div>
                     </div>
                 </section>
-            </div>
+            </main>
             <xsl:call-template name="footer" />
         </body>
 
@@ -1259,12 +1264,14 @@
         <li class="dao">
             <a class="{@xlink:role}" href="{@xlink:href}" target="_blank">
                 <xsl:choose>
-                    <xsl:when test="starts-with(@xlink:role, 'audio-')">Listen to </xsl:when>
-                    <xsl:when test="starts-with(@xlink:role, 'video-')">Watch </xsl:when>
-                    <xsl:when test="starts-with(@xlink:role, 'zip-')">Download </xsl:when>
-                    <xsl:when test="starts-with(@xlink:role, 'data-')">Download </xsl:when>
+                    <xsl:when test="starts-with(@xlink:role, 'audio-')">Listen to <span class="sr-only"><xsl:value-of select="@xlink:title"/> (audio file)</span> </xsl:when>
+                    <xsl:when test="starts-with(@xlink:role, 'video-')">Watch <span class="sr-only"><xsl:value-of select="@xlink:title"/> (video file)</span></xsl:when>
+                    <xsl:when test="starts-with(@xlink:role, 'zip-')">Download <span class="sr-only"><xsl:value-of select="@xlink:title"/> (compressed file)</span></xsl:when>
+                    <xsl:when test="starts-with(@xlink:role, 'data-')">Download <span class="sr-only"><xsl:value-of select="@xlink:title"/> (data file)</span></xsl:when>
                     
-                    <xsl:otherwise>View </xsl:otherwise> <!-- for text- and image- -->
+                    <xsl:otherwise>View 
+                        <span class="sr-only"><xsl:value-of select="@xlink:title"/> (pdf file)</span>
+                    </xsl:otherwise> <!-- for text- and image- -->
                 </xsl:choose>
                 <xsl:if test="../ead:unittitle != @xlink:title">
                     <xsl:value-of select="@xlink:title"/>
