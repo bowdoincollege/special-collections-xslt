@@ -11,6 +11,10 @@
         *                   houser@bowdoin.edu                            *
         *                   Winona Salesky (original)                     *
         *                   wsalesky@gmail.com                            *
+        *                   Mike McDermott                                *
+        *                   mmcderm2@bowdoin.edu                          *
+        *                   Carr Ross                                     *
+        *                   cross@bowdoin.edu                             *
         *                                                                 *
         * ABOUT:           This file was created for use with             *
         *                  the Archivists' Toolkit.                       *
@@ -18,6 +22,8 @@
         *                  Tweaked to work with ArchivesSpace EAD         *
         *                  Tweaked to display new options div, 20211214 CR*
         *                  Added accessibility features, 20220426 CR      *
+        *                  added non-neutrality template MM 2022-05-06    *
+        *                                                                 *
         *******************************************************************
     -->
     <!-- Server side includes for HEAD, masthead, and footer -->
@@ -384,9 +390,32 @@
                 <xsl:apply-templates select="/ead:ead/ead:archdesc/ead:altformavail"/>
                 <xsl:apply-templates select="/ead:ead/ead:archdesc/ead:originalsloc"/>
                 <xsl:apply-templates select="/ead:ead/ead:archdesc/ead:prefercite"/>
+                <xsl:call-template name="non-neutrality" />
             </xsl:with-param>
         </xsl:call-template>
     </xsl:template>
+
+    <xsl:template name="non-neutrality">
+    <!-- The Acknowledgment of non-neutrality Section is completely static and not represented in the EAD - 
+        so just plonking it in as parameters.  (Mike May 2022) -->
+        <xsl:call-template name="panel-data-row">
+            <xsl:with-param name="default-title">Acknowledgment of non-neutrality</xsl:with-param>
+            <xsl:with-param name="content">
+            <p>
+            The George J. Mitchell Department of Special Collections &amp; Archives, like all archives and special 
+            collections libraries, is the creation of human beings who have collected, organized, and described things 
+            in ways that reflect personal, cultural, societal, and institutional biases. Although we strive to preserve 
+            and present collections in a manner that is respectful to the individuals and communities who create, use, 
+            and are represented in the collections, we acknowledge that our systems are neither neutral nor perfect. We 
+            encourage you to let us know if you encounter materials, descriptive language, or practices that are 
+            offensive or harmful, particularly those for which inadequate context or warning is offered. We are 
+            committed to modifying and updating our descriptive practices to use respectful and inclusive terminology 
+            and appreciate your help in this work. We look forward to supporting you in your research and learning 
+            together.
+            </p> 
+            </xsl:with-param> <!-- /content  -->
+        </xsl:call-template> <!-- /panel-data-row  -->
+    </xsl:template> <!-- /non-neutrality  -->
 
     <!-- Preferred citation -->
     <xsl:template match="ead:prefercite">
