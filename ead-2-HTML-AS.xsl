@@ -107,6 +107,9 @@
                                     <xsl:attribute name="class">
                                         <xsl:text>btn btn-info aeon-request</xsl:text>
                                     </xsl:attribute>
+                                    <xsl:attribute name="target">
+                                        <xsl:text>_blank</xsl:text>
+                                    </xsl:attribute>
                                     Request for Use
                                     <span class="sr-only">
                                         External link
