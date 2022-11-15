@@ -47,7 +47,7 @@
 
         <head>
             <meta charset="UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            
             <title>
                 <xsl:value-of select="$full-title" />
             </title>
@@ -57,9 +57,6 @@
         </head>
 
         <body>
-            <div id="skip2main">
-                <a href="#main-content">Skip to main content</a>
-            </div>
             <xsl:call-template name="header" />
             <main class="wrapper">
                 <section class="container" id="main-content">
@@ -173,7 +170,7 @@
     </xsl:template>
     <!-- CSS for styling HTML output. Place all CSS styles in this template.-->
     <xsl:template name="css">
-        <link rel="stylesheet" type="text/css" href="/arch/libr/css/finding-aid.css?version=3.0" />
+        <link rel="stylesheet" type="text/css" href="/arch/libr/css/finding-aid.css?version=3.1" />
     </xsl:template>
     <!-- This template creates a customizable header  -->
     <xsl:template name="header">
